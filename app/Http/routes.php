@@ -30,6 +30,7 @@ Route::group(['middleware' => ['web']], function () {
 
     Route::get('/profile', 'UserController@profile');
     Route::post('/profile', 'UserController@update');
+    Route::post('/profile_avatar', 'UserController@update_avatar');
 
     Route::get('/tasks', 'TaskController@index');
     Route::post('/task', 'TaskController@store');

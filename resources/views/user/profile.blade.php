@@ -7,6 +7,23 @@
                 <div class="panel panel-default">
                     <div class="panel-heading">Profile</div>
                     <div class="panel-body">
+                        <form class="form-horizontal" action="/profile_avatar" method="post"
+                              enctype="multipart/form-data">
+                            {{ csrf_field() }}
+
+                            <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
+                                <label class="col-md-4 control-label">Avatar</label>
+                                <img src="/avatars/{{ $user->avatar }}" width="100" >
+                                <div class="col-md-6">
+                                    <input type="file" class="form-control-file" name="avatar" id="avatarFile"
+                                           aria-describedby="fileHelp" onchange="this.form.submit()">
+                                    <small id="fileHelp" class="form-text text-muted">Please upload a valid image file.
+                                        Size of image should not be more than 2MB.
+                                    </small>
+                                </div>
+                            </div>
+                        </form>
+
                         <form class="form-horizontal" role="form" method="POST" action="{{ url('/profile') }}">
                             {!! csrf_field() !!}
 
@@ -14,7 +31,8 @@
                                 <label class="col-md-4 control-label">User name</label>
 
                                 <div class="col-md-6">
-                                    <input type="text" class="form-control" name="name" value="{{ old('name') ? old('name') : $user->name }}">
+                                    <input type="text" class="form-control" name="name"
+                                           value="{{ old('name') ? old('name') : $user->name }}">
 
                                     @if ($errors->has('name'))
                                         <span class="help-block">
@@ -24,11 +42,12 @@
                                 </div>
 
                             </div>
-                            <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
+                            <div class="form-group{{ $errors->has('phone') ? ' has-error' : '' }}">
                                 <label class="col-md-4 control-label">Phone</label>
 
                                 <div class="col-md-6">
-                                    <input type="text" class="form-control" id="phone" name="phone" value="{{ old('phone') ? old('phone') : $user->phone }}">
+                                    <input type="text" class="form-control" id="phone" name="phone"
+                                           value="{{ old('phone') ? old('phone') : $user->phone }}">
 
                                     @if ($errors->has('phone'))
                                         <span class="help-block">
@@ -54,7 +73,7 @@
 @section('js_extra')
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.maskedinput/1.4.1/jquery.maskedinput.js"></script>
     <script type="text/javascript">
-        jQuery(function($){
+        jQuery(function ($) {
             $("#phone").mask("+(999) 999-9999");
         });
     </script>
