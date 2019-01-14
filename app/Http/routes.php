@@ -28,7 +28,7 @@ Route::group(['middleware' => ['web']], function () {
         return view('welcome');
     })->middleware('guest');
 
-    Route::get('/profile', 'UserController@profile');
+    Route::get('/profile', 'UserController@profile')->middleware('auth');
     Route::post('/profile', 'UserController@update');
     Route::post('/profile_avatar', 'UserController@update_avatar');
 

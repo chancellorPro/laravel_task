@@ -51,23 +51,25 @@ class UserController extends Controller
     {
         $this->validate($request, [
             'avatar' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-        ]);
+        ]); // валидация входящих параметров
 
-        $user = $request->user();
-        if (file_exists(public_path() . '/avatars/' . $user->avatar)) {
-            unlink(public_path() . '/avatars/' . $user->avatar);
+        $user = $request->user(); // получаю объект пользователя из запроса
+        if (file_exists(public_path() . '/avatars/' . $user->avatar)) { // проверяю существует ли файл аватара на диске
+            unlink(public_path() . '/avatars/' . $user->avatar); // удаляю файл
         }
 
+        // формирую имя для файла аватара
         $avatarName = $request->user()->id . '_avatar' . time() . '.' . request()->avatar->getClientOriginalExtension();
 
-        $file = $request->file('avatar');
-        $file->move('avatars', $avatarName);
+        $file = $request->file('avatar'); // получаю файл из запроса
+        $file->move('avatars', $avatarName); // записываю файл на диск
 
-        $user->avatar = $avatarName;
-        $user->save();
+        $user->avatar = $avatarName; // записываю имя файла в объект пользователя
+        $user->save(); // сохраняю данные пользователя в базу
 
         return back()
-            ->with('success', 'You have successfully upload image.');
+            ->with('success', 'You have successfully upload image.'); // возвращаю прошлую страницу с сообщением об
+        // успешном выполнении
 
     }
 }
