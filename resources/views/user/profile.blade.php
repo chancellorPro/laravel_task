@@ -11,19 +11,27 @@
                               enctype="multipart/form-data">
                             {{ csrf_field() }}
 
+                            @if (file_exists(public_path() . '/avatars/' . $user->avatar))
                             <div class="form-group{{ $errors->has('avatar') ? ' has-error' : '' }}">
                                 <label class="col-md-4 control-label">Avatar</label>
-                                @if (file_exists(public_path() . '/avatars/' . $user->avatar))
                                     <img id="avatar" class="col-md-6" src="/avatars/{{ $user->avatar }}">
-                                @endif
                             </div>
+                            @endif
 
                             <div class="form-group{{ $errors->has('avatar') ? ' has-error' : '' }}">
 
-                                <label class="col-md-4"></label>
+                                <label class="col-md-4 control-label">
+                                    @if (!file_exists(public_path() . '/avatars/' . $user->avatar))
+                                        Avatar
+                                    @endif
+                                </label>
 
                                 <div class="col-md-6">
-                                    <input style="display: none" type="file" class="form-control-file" name="avatar" id="avatarFile"
+                                    <input
+                                            @if (file_exists(public_path() . '/avatars/' . $user->avatar))
+                                                style="display: none"
+                                            @endif
+                                            type="file" class="form-control-file" name="avatar" id="avatarFile"
                                            aria-describedby="fileHelp" onchange="this.form.submit()">
                                     <small id="fileHelp" class="form-text text-muted">Please upload a valid image file.
                                         Size of image should not be more than 2MB.
