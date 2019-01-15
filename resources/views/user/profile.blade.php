@@ -11,9 +11,11 @@
                               enctype="multipart/form-data">
                             {{ csrf_field() }}
 
-                            <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
+                            <div class="form-group{{ $errors->has('avatar') ? ' has-error' : '' }}">
                                 <label class="col-md-4 control-label">Avatar</label>
-                                <img src="/avatars/{{ $user->avatar }}" width="100" >
+                                @if (file_exists(public_path() . '/avatars/' . $user->avatar))
+                                    <img class="pull-right" src="/avatars/{{ $user->avatar }}" width="100">
+                                @endif
                                 <div class="col-md-6">
                                     <input type="file" class="form-control-file" name="avatar" id="avatarFile"
                                            aria-describedby="fileHelp" onchange="this.form.submit()">
@@ -22,12 +24,13 @@
                                     </small>
                                 </div>
                             </div>
+
                         </form>
 
                         <form class="form-horizontal" role="form" method="POST" action="{{ url('/profile') }}">
                             {!! csrf_field() !!}
 
-                            <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
+                            <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
                                 <label class="col-md-4 control-label">User name</label>
 
                                 <div class="col-md-6">
