@@ -17,8 +17,11 @@
                                     <img id="avatar" class="col-md-6" src="/avatars/{{ $user->avatar }}">
                                 @endif
                             </div>
+
                             <div class="form-group{{ $errors->has('avatar') ? ' has-error' : '' }}">
+
                                 <label class="col-md-4"></label>
+
                                 <div class="col-md-6">
                                     <input style="display: none" type="file" class="form-control-file" name="avatar" id="avatarFile"
                                            aria-describedby="fileHelp" onchange="this.form.submit()">
