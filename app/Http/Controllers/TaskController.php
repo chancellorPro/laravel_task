@@ -18,13 +18,15 @@ class TaskController extends Controller
      * @var TaskRepository
      */
     protected $tasks;
-    //TODO : CHECK
+
+
 
     /**
      * Create a new controller instance.
      *
      * @param  TaskRepository  $tasks
      * @return void
+     *
      */
     public function __construct(TaskRepository $tasks)
     {
@@ -32,6 +34,7 @@ class TaskController extends Controller
 
         $this->tasks = $tasks;
     }
+    //TODO : CHECK
 
     /**
      * Display a list of all of the user's task.
