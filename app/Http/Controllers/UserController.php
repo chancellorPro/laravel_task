@@ -39,7 +39,7 @@ class UserController extends Controller
             'name'  => $request->name,
             'phone' => $phone,
         ]);
-
+        //TODO: testing
         return redirect('/profile');
     }
 
